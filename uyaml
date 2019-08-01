@@ -1,10 +1,10 @@
 #!/bin/bash
 
-DIR=$(cd `dirname $0` && pwd)
+DIR="$(dirname $0)/$(dirname "$(readlink "$0")")"
 FALLBACK_FILE="${USER}/.uyamlspec.txt"
 
 if [ -e ${FALLBACK_FILE} ]; then
-    ${DIR}/../libexec/UnityYAMLMerge merge "$@" --fallback "${FALLBACK_FILE}"
+    ${DIR}/../libexec/UnityYAMLMerge merge -h "$@" --fallback "${FALLBACK_FILE}"
 else
-    ${DIR}/../libexec/UnityYAMLMerge merge "$@"
+    ${DIR}/../libexec/UnityYAMLMerge merge -h "$@"
 fi
