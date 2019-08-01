@@ -17,7 +17,7 @@ brew install "unityyamlmerge"
 
 ### Source control
 Follow the [Unity Smart Merge](https://docs.unity3d.com/Manual/SmartMerge.html) guide
-replacing `'<path to UnityYAMLMerge>' merge` to `uyaml` only, example `.gitconfig`
+replacing `'<path to UnityYAMLMerge>' merge` to `/usr/local/bin/uyaml` only, example `.gitconfig`
 
 ```
 [merge]
@@ -25,7 +25,7 @@ tool = unityyamlmerge
 
 [mergetool "unityyamlmerge"]
 trustExitCode = false
-cmd = uyaml -p "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
+cmd = /usr/local/bin/uyaml -p "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
 ```
 
 ### Custom fallback file
