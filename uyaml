@@ -1,0 +1,10 @@
+#!/bin/bash
+
+DIR=$(cd `dirname $0` && pwd)
+FALLBACK_FILE="${USER}/.uyamlspec.txt"
+
+if [ -e ${FALLBACK_FILE} ]; then
+    ${DIR}/../libexec/UnityYAMLMerge merge "$@" --fallback "${FALLBACK_FILE}"
+else
+    ${DIR}/../libexec/UnityYAMLMerge merge "$@"
+fi
