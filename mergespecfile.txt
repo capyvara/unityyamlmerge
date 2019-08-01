@@ -1,0 +1,50 @@
+#
+# UnityYAMLMerge fallback file
+#
+
+# Modify the next two lines if scene or prefab files should fallback
+# on other that the default fallbacks listed below.
+#
+# %l is replaced with the path of you local version
+# %r is replaced with the path of the incoming remote version
+# %b is replaced with the common base version
+# %d is replaced with a path where the result should be written to
+# On Windows %programs% is replaced with "C:\Program Files" and "C:\Program Files (x86)" there by resulting in two entries to try out
+# On OSX %programs% is replaced with "/Applications" and "$HOME/Applications" thereby resulting in two entries to try out
+
+unity use "%programs%\YouFallbackMergeToolForScenesHere.exe" "%l" "%r" "%b" "%d"
+prefab use "%programs%\YouFallbackMergeToolForPrefabsHere.exe" "%l" "%r" "%b" "%d"
+
+#
+# Default fallbacks for unknown files. First tool found is used.
+#
+
+# Apple File Merge
+* use "/usr/bin/opendiff" %r %l -ancestor %b -merge %d
+
+# Beyond Compare
+* use "%programs%\Beyond Compare 4\bcomp.exe" "%r" "%l" "%b" "%d"
+* use "%programs%\Beyond Compare 3\bcomp.exe" "%r" "%l" "%b" "%d"
+* use "%programs%/Beyond Compare.app/Contents/MacOS/bcomp" "%r" "%l" "%b" "%d"
+* use "/usr/bin/bcompare" "%r" "%l" "%b" "%d"
+
+# Araxis Merge
+* use "%programs%\Araxis\Araxis Merge\compare.exe" /3 /a2 /wait /title1:"Other" /title2:"Base" /title3:"Local" "%l" "%b" "%r" "%d"
+* use "%programs%/Araxis Merge.app/Contents/Utilities/compare" -3 -a2 -wait -title1:"Other" -title2:"Base" -title3:"Local" "%l" "%b" "%r" "%d"
+
+# Perforce merge
+* use "%programs%\Perforce\p4merge.exe" "%b" "%r" "%l" "%d"
+* use "%programs%/p4merge.app/Contents/Resources/launchp4merge" "%b" "%r" "%l" "%d"
+
+# PlasticSCM merge
+* use "%programs%\PlasticSCM5\client\mergetool.exe" -b=%b -s=%l -d=%r -r=%d
+* use "%programs%\PlasticSCM4\client\mergetool.exe" -b=%b -s=%l -d=%r -r=%d
+* use "%programs%/PlasticSCM/client/mergetool" -b=%b -s=%l -d=%r -r=%d
+* use "/opt/plasticscm/client/mergetool" -b=%b -s=%l -d=%r -r=%d
+* use "/opt/plasticscm4/client/mergetool" -b=%b -s=%l -d=%r -r=%d
+
+# SourceGear DiffMerge
+* use "%programs%\SourceGear\DiffMerge\DiffMerge.exe" --nosplash -m -t1="Incoming Changes"  -t2="Base" -t3="Working Copy" -r="%d" "%l" "%b" "%r"
+* use "%programs%\SourceGear\Common\DiffMerge\sgdm.exe" --nosplash -m -t1="Incoming Changes"  -t2="Base" -t3="Working Copy" -r="%d" "%l" "%b" "%r"
+* use "%programs%/DiffMerge.app/Contents/MacOS/DiffMerge" --nosplash -m -t1="Incoming Changes"  -t2="Base" -t3="Working Copy" -r="%d" "%l" "%b" "%r"
+* use "%programs%/Utilities/DiffMerge.app/Contents/MacOS/DiffMerge" --nosplash -m -t1="Incoming Changes"  -t2="Base" -t3="Working Copy" -r="%d" "%l" "%b" "%r"

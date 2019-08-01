@@ -1,0 +1,34 @@
+# Load sequence unique keys from file
+# Format of file is lines of:
+# <mode> <path to sequence field> <space> <path to key> <space> <path to key> ...
+# e.g.
+# set *.GameObject.m_Component *.fileID
+# Meaning * matches all fileIDs, the matching GameObjects of those and look at the
+# m_Components sequence.
+# The unique key for an item in that sequence is the fileID of any objects in there.
+#
+# This would match the YAML:
+# 1:
+#   GameObject:
+#     m_Component: [ { 1: { fileID: 32 } }, { 5: { fileID: 88 }} ]
+#
+# And use 32 and 88 as unique keys for the item in the m_Components sequence
+#
+
+[arrays]
+set *.GameObject.m_Component *.fileID
+set *.Prefab.m_Modification.m_Modifications target.fileID target.guid propertyPath
+plain *.MeshRenderer.m_Materials
+plain *.Renderer.m_Materials
+
+# Matched in order
+[exclusions]
+exclude *.MeshRenderer.m_Materials.*
+exclude *.SpriteRenderer.m_Materials
+exclude *.SpriteRenderer.m_Color
+include *.ParticleSystem.InitialModule
+exclude *.ParticleSystem.*
+exclude *.ParticleSystem.InitialModule.*
+#excludeDepend *.MonoBehaviour m_Script ^m_
+excludeIfContains *.MonoBehaviour.* x y z
+excludeIfContains *.MonoBehaviour.* r g b
